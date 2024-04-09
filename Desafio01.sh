@@ -35,4 +35,17 @@ pwd  -P >directorio_actual.txt
 #Ejercicio Nro 5
 touch arch1.txt arch2.txt arch3.txt arch4.txt arch5.txt
 mkdir -p Archivos_creados
-mv arch1.txt arch2.txt arch3.txt arch4.txt arch5.txt /Archivos_creados/
+mv arch1.txt arch2.txt arch3.txt arch4.txt arch5.txt /Desatando-Automatizacion/Archivos_creados
+
+
+#Ejercicio Nro 6
+echo 'Introduzca NOmbre del Archivo a buscar'
+read nombreA
+echo  $nombreA
+find .  -name $nombreA -exec cat $nombreA {}\;
+
+
+
+
+
+
