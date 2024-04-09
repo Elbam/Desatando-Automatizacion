@@ -8,14 +8,14 @@ if dpkg -l | grep git;
    then echo "ya esta instalado git"
    else
    echo "instalando git"
-   sudo apt install git -y
+   apt install git -y
 fi
 
 if dpkg -l | grep tree;
    then echo "ya esta instalado tree"
    else
    echo "instalando tree"
-   sudo apt install tree
+   apt install tree
 fi
 
 
@@ -26,3 +26,13 @@ uname -a > info_Sistema.txt
 mkdir -p Desafio1/Ejercicio1 Desafio1/Ejercicio2 Desafio1/Ejercicio2/Prueba2
 tree Desafio1 > arbol.txt 
 
+#Ejercicio Nro 3
+cat /etc/passwd > usuarios.txt
+
+#Ejercicio Nro 4
+pwd  -P >directorio_actual.txt
+
+#Ejercicio Nro 5
+touch arch1.txt arch2.txt arch3.txt arch4.txt arch5.txt
+mkdir -p Archivos_creados
+mv arch1.txt arch2.txt arch3.txt arch4.txt arch5.txt /Archivos_creados/
