@@ -41,11 +41,22 @@ mv arch1.txt arch2.txt arch3.txt arch4.txt arch5.txt /Desatando-Automatizacion/A
 #Ejercicio Nro 6
 echo 'Introduzca NOmbre del Archivo a buscar'
 read nombreA
-echo  $nombreA
-find .  -name $nombreA -exec cat $nombreA {}\;
+find .  -name $nombreA -exec cat $nombreA {} \;
 
+#Ejercicio Nro 7
+tree -a
 
+#Ejercicio Nro 8
+echo "primera linea" > datos.txt
+echo "segunda linea" >> datos.txt
+echo "tercera linea" >> datos.txt
+echo "cuarta oracion" >>  datos.txt
+echo "quinta oracion" >> datos.txt
+echo "sexta oracion" >> datos.txt
+echo 'Introduzca palabra a buscar:'
+read palabraB
+grep $palabraB datos.txt >busqueda.txt
 
-
+#Ejercicio Nro 9
 
 
