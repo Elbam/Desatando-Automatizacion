@@ -58,5 +58,28 @@ read palabraB
 grep $palabraB datos.txt >busqueda.txt
 
 #Ejercicio Nro 9
+#dt=`date +%y-%m`  ´
+dt=$(date +"%y%m%d")
+find . -type f -name "*.txt" -exec mv {} {}_$dt \;
 
+#Ejercicio nro 10
+ls -lh > lista_archivos.txt
+
+
+#Ejercicio Nro 11
+mkdir -p mi_proyecto mi_proyecto/documentos mi_proyecto/codigo mi_proyecto/codigo/utilidades 
+cd mi_proyecto/documentos
+echo "proyecto de Elba Mujica" > plan.txt
+echo "el plan es aprender automatizacion " >>plan.txt
+echo "la meta superior es ser DEVPOS" >> plan.txt
+cd .. 
+cd codigo
+echo "hola mundo! " > main.sh
+cd utilidades
+echo "#!/bin/bash" >funciones.sh
+echo "  " >> funciones.sh
+echo "Introduzca Nombre Usuario:" >> funciones.sh
+echo "read nombreU " >> funciones.sh
+echo "Introduzca Apellido Usuario:" >> funciones.sh
+echo "read apellidoU" >> funciones.sh
 
