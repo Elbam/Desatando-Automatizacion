@@ -83,3 +83,26 @@ echo "read nombreU " >> funciones.sh
 echo "Introduzca Apellido Usuario:" >> funciones.sh
 echo "read apellidoU" >> funciones.sh
 
+#Ejercicio Nro 12
+ls
+cd ../../../
+ls
+#cd Desatando-Automatizacion
+echo "#!/bin/bash" >ejer1.sh
+echo "  " >> ejer1.sh
+echo " Introduzca nombre: " >> ejer1.sh
+echo "read nombreU" >> ejer1.sh
+echo " Introduzca Apellido" >> ejer1.sh
+echo "read apellidoU" >> ejer1.sh
+echo "Nombre registrado es: " >> ejer1.sh
+echo "echo $nombreU" >>ejer1.sh
+echo "Apellido registrado es:" >>ejer1.sh
+echo "echo $apellidoU" >>ejer1.sh 
+chmod u+x ejer1.sh
+
+#Ejercicio Nro 13
+numero12=12
+numero5=5
+numero6=6
+let suma=(numero12+numero5+numero6)
+echo $suma
