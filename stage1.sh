@@ -4,14 +4,8 @@
 
 #Variables
 USERID=$(id -u)
-repo="reto-01"
 bdd="devopstravel"
 
-
-if [ "${USERID}" -ne 1000 ];
-   then echo -e "correr como usuario root"
-   exit
-fi
 
 #sudo apt-get update
 
@@ -39,7 +33,7 @@ fi
 
  sudo systemctl start mariadb
  sudo systemctl enable mariadb
- sudo systemctl status mariadb
+#sudo systemctl status mariadb
 
 
 if dpkg -l | grep apache2;
@@ -52,7 +46,7 @@ fi
 
 sudo systemctl start apache2
 sudo systemctl enable apache2
-sudo systemctl status apache2
+#sudo systemctl status apache2
 
 php -v
 
@@ -64,6 +58,20 @@ sudo sed -i's/DirectoryIndex index.php/DirectoryIndex index.html/DirectoryIndex 
 sudo systemctl reload apache2
 
 #sudo curl localhost/info.php
+
+# Aplicacion WEB
+if [ -d "proyectof" ];
+   then
+     echo "Ya existe la carpeta del Repo, Actualizando Repo"
+     sleep 10
+     cd proyectof
+     git pull origin clase2-linux-bash
+   else
+    echo "Instalando Repo Aplicacion"
+    sleep 10
+    git clone -b clase2-linux-bash https://github.com/roxsross/bootcamp-devops-2023.git proyectof
+    cd proyectof
+fi
 
 #Base de Datos
 
@@ -79,27 +87,13 @@ if [ $? -eq 0 ];
     CREATE USER 'codeuser'@'localhost' IDENTIFIED BY 'codepass';
     GRANT ALL PRIVILEGES ON *.* TO 'codeuser'@'localhost';
     FLUSH PRIVILEGES;"
-    sudo mysql < desafio01/app-295devops-travel/database/devopstravel.sql
+    sudo mysql < app-295devops-travel/database/devopstravel.sql
 fi
 
-
-# Aplicacion WEB
-if [ -d "desafio01" ];
-   then
-     echo "Ya existe la carpeta del Repo, Actualizando Repo"
-     sleep 10
-     cd desafio01
-     git pull origin clase2-linux-bash
-   else
-    echo "Instalando Repo Aplicacion"
-    sleep 10
-    git clone -b clase2-linux-bash https://github.com/roxsross/bootcamp-devops-2023.git desafio01
-    cd desafio01
-fi
 
 git checkout clase2-linux-bash
-cd --
-cd desafio01/app-295devops-travel
+#cd --
+cd app-295devops-travel
 sudo sed -i 's/""/"codepass";/g' config.php
 if  [ $? -eq 0 ];
      then 
@@ -110,7 +104,7 @@ if  [ $? -eq 0 ];
 fi
 
 cd --
-sudo cp -r desafio01/app-295devops-travel/*  /var/www/html/
+sudo cp -r *  /var/www/html/
 sleep 2
 
 #configurar acceso a BdD de la app
@@ -120,29 +114,3 @@ sleep 2
 #sudo mv /var/www/html/index.html  /var/www/html/index.html.bkp
 
 sudo systemctl reload apache2
-
-# Notificacion a DISCORD
-
-discord_str="https://discord.com/api/webhooks/1169002249939329156/7MOorDwzym-yBUs3gp0k5q7HyA42M5eYjfjpZgEwmAx1vVVcLgnlSh4TmtqZqCtbupov"
-cd --
-cd desafio01
-fullpayload=(
-      "Challenge 01 Web Application deploy using Bash Scripting"
-      "CodeBase Information:Sitio WEB En linea"
-      "Github Repo: https://github.com/roxsross/bootcamp-devops-2023"
-      "Author: Author $(git log -1 --pretty=format:'%an')"
-      "Commit ID: $(git rev-parse --short HEAD)"
-      "Commit Message: $(git log -1 --pretty=format:'%an')"
-      "WebApp Status: Online"
-      "Automation Script Information:"
-      "Maintainer: Elba Mujica"
-      "Github Repo: https://github.com/Elbam/295DEVOPS" 
-      "Script details: Please refer to the README.md"
-
-    )
-
-    for payload in "${fullpayload[@]}"; do
-      curl -X POST -H "Content-Type: application/json" -d '{
-        "content": "'"$payload"'"
-      }' "$discord_str"
-    done
